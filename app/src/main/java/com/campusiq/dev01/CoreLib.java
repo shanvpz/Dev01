@@ -3,6 +3,8 @@ package com.campusiq.dev01;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 
 import com.karumi.dexter.Dexter;
@@ -13,7 +15,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.List;
 
-import static android.content.Context.TELEPHONY_SERVICE;
+
 
 /**
  * Created by campusiq on 27/11/17.
@@ -21,7 +23,7 @@ import static android.content.Context.TELEPHONY_SERVICE;
 
 public class CoreLib {
 
-    public void ReqestPermissions(Activity activity){
+    public static void ReqestPermissions(Activity activity) {
         Dexter.withActivity(activity)
                 .withPermissions(
                         //Manifest.permission.CAMERA,
@@ -29,9 +31,26 @@ public class CoreLib {
                         Manifest.permission.READ_CONTACTS,
                         Manifest.permission.RECORD_AUDIO
                 ).withListener(new MultiplePermissionsListener() {
-            @Override public void onPermissionsChecked(MultiplePermissionsReport report) {/* ... */}
-            @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {/* ... */}
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
         }).check();
     }
+
+
+    public static String getIMEI(Context ctx) {
+        String ts = Context.TELEPHONY_SERVICE;
+        TelephonyManager mTelephonyMgr = (TelephonyManager) ctx.getSystemService(ts);
+        if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+
+            //return true;
+        }
+        String imsi = mTelephonyMgr.getSubscriberId();
+        String imei = mTelephonyMgr.getDeviceId();
+        return imei;
+    }
+
 
 }
