@@ -59,25 +59,25 @@ static GoogleApiClient googleApiClient;
         return imei;
     }
 
-    public static GoogleApiClient ConnectGooglePlay(Context ctx){
-        try {
-            googleApiClient = new GoogleApiClient.Builder(ctx)
-                    .addApi(Games.API)
-                    .addScope(Games.SCOPE_GAMES)
-                    .enableAutoManage((FragmentActivity) ctx, new GoogleApiClient.OnConnectionFailedListener() {
-                        @Override
-                        public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                            Log.e(TAG, "Could not connect to Play games services");
-
-                        }
-                    }).build();
-
-        }
-        catch (Exception e){
-            Log.i("from ConnectGooglePlay",e.getMessage());
-        }
-        return googleApiClient;
-    }
+//    public static GoogleApiClient ConnectGooglePlay(Context ctx){
+//        try {
+//            googleApiClient = new GoogleApiClient.Builder(ctx)
+//                    .addApi(Games.API)
+//                    .addScope(Games.SCOPE_GAMES)
+//                    .enableAutoManage((FragmentActivity) ctx, new GoogleApiClient.OnConnectionFailedListener() {
+//                        @Override
+//                        public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+//                            Log.e(TAG, "Could not connect to Play games services");
+//
+//                        }
+//                    }).build();
+//
+//        }
+//        catch (Exception e){
+//            Log.i("from ConnectGooglePlay",e.getMessage());
+//        }
+//        return googleApiClient;
+//    }
 
 
 }
